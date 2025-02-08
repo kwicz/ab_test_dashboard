@@ -1,5 +1,14 @@
 <<<<<<< HEAD
-# ab_test_dashboard
+
+# A/B Test Dashboard
+
+## Core Features of the Dashboard
+
+1. Create a new test with a name, description, and test variations (A & B).
+2. View a list of tests with key details (status, start date, end date).
+3. Manage test details (edit, pause, delete tests).
+4. Integrate with GTM to dynamically inject scripts.
+
 =======
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -35,6 +44,3 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 659a342 (Initial commit: Next.js setup with Tailwind and TypeScript)
