@@ -60,6 +60,20 @@ export default function TestsPage() {
     setModalOpen(false);
   };
 
+  const updateTest = (updatedTest: any) => {
+    const updatedTests = tests.map((test) =>
+      test.id === updatedTest.id ? updatedTest : test
+    );
+    setTests(updatedTests);
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+  };
+
+  const deleteTest = (id: string) => {
+    const updatedTests = tests.filter((test) => test.id !== id);
+    setTests(updatedTests);
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+  };
+
   const filteredTests = tests.filter(
     (test) =>
       test.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -94,6 +108,20 @@ export default function TestsPage() {
             onClick={() => router.push(`/tests/${test.id}`)}
           >
             <TestCard test={test} />
+            <div className='space-x-2'>
+              <button
+                onClick={() => updateTest({ ...test, status: 'Updated' })}
+                className='bg-yellow-500 text-white p-2 rounded'
+              >
+                Update
+              </button>
+              <button
+                onClick={() => deleteTest(test.id)}
+                className='bg-red-500 text-white p-2 rounded'
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
