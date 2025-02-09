@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import TestCard from '@/components/TestCard';
@@ -38,7 +37,7 @@ export default function TestsPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [tests, setTests] = useState(dummyData);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
-  const [currentTest, setCurrentTest] = useState<any>(null);
+  const [currentTest, setCurrentTest] = useState<Test | null>(null);
 
   useEffect(() => {
     const storedTests = localStorage.getItem('tests');
@@ -55,19 +54,35 @@ export default function TestsPage() {
     }
   }, [tests]);
 
-  const addTest = (test: any) => {
+  interface Test {
+    id: string;
+    name: string;
+    client: string;
+    siteArea: string;
+    status: string;
+    dateCreated: string;
+  }
+
+  const addTest = (test: Test) => {
     const updatedTests = [...tests, test];
     setTests(updatedTests);
     localStorage.setItem('tests', JSON.stringify(updatedTests));
     setModalOpen(false);
   };
 
-  const openUpdateModal = (test: any) => {
+  const openUpdateModal = (test: {
+    id: string;
+    name: string;
+    client: string;
+    siteArea: string;
+    status: string;
+    dateCreated: string;
+  }) => {
     setCurrentTest(test);
     setUpdateModalOpen(true);
   };
 
-  const updateTest = (updatedTest: any) => {
+  const updateTest = (updatedTest: Test) => {
     const updatedTests = tests.map((test) =>
       test.id === updatedTest.id ? updatedTest : test
     );

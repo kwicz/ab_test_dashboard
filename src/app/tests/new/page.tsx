@@ -5,7 +5,12 @@ import TestForm from '@/components/TestForm';
 
 export default function NewTestPage() {
   const router = useRouter();
-  const [tests, setTests] = useState<any[]>([]);
+  interface Test {
+    id: string;
+    name: string;
+  }
+
+  const [tests, setTests] = useState<Test[]>([]);
   const [isLoaded, setIsLoaded] = useState(false); // Prevent premature rerender
 
   useEffect(() => {
@@ -13,7 +18,7 @@ export default function NewTestPage() {
     if (storedTests) {
       setTests(JSON.parse(storedTests));
     }
-    setIsLoaded(true); // Ensure data is fully loaded before rendering
+    setIsLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -22,14 +27,13 @@ export default function NewTestPage() {
     }
   }, [tests, isLoaded]);
 
-  const addTest = (test: any) => {
+  const addTest = (test: Test) => {
     const updatedTests = [...tests, test];
     setTests(updatedTests);
     localStorage.setItem('tests', JSON.stringify(updatedTests));
     router.push('/tests');
   };
 
-  // Prevent rendering before state is fully initialized
   if (!isLoaded) {
     return <p>Loading...</p>;
   }

@@ -2,8 +2,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import TestCard from '@/components/TestCard';
-import TestForm from '@/components/TestForm';
 
 export default function TestDetailsPage() {
   const router = useRouter();
@@ -23,10 +21,19 @@ export default function TestDetailsPage() {
     const storedTests = localStorage.getItem('tests');
     const testData = storedTests ? JSON.parse(storedTests) : [];
 
-    const foundTest = testData.find((t: any) => t.id === params.id);
+    type Test = {
+      id: string;
+      name: string;
+      client: string;
+      siteArea: string;
+      status: string;
+      dateCreated: string;
+    };
+
+    const foundTest = testData.find((t: Test) => t.id === params.id);
 
     if (!foundTest) {
-      router.push('/tests'); // Redirect only if not found
+      router.push('/tests');
     } else {
       setTest(foundTest);
     }

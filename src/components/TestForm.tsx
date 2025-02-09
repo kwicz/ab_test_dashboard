@@ -5,8 +5,22 @@ export default function TestForm({
   onSubmit,
   initialData,
 }: {
-  onSubmit: (test: any) => void;
-  initialData?: any;
+  onSubmit: (test: {
+    id: string;
+    name: string;
+    client: string;
+    siteArea: string;
+    status: string;
+    dateCreated: string;
+  }) => void;
+  initialData?: {
+    id: string;
+    name: string;
+    client: string;
+    siteArea: string;
+    status: string;
+    dateCreated: string;
+  };
 }) {
   const [formData, setFormData] = useState({
     name: '',
