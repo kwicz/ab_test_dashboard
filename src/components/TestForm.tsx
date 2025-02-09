@@ -1,10 +1,12 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function TestForm({
   onSubmit,
+  initialData,
 }: {
   onSubmit: (test: any) => void;
+  initialData?: any;
 }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,6 +15,13 @@ export default function TestForm({
     status: 'Pending',
     dateCreated: new Date().toISOString().split('T')[0],
   });
+
+  // Populate formData when initialData is available
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -27,14 +36,7 @@ export default function TestForm({
       formData.client.trim() &&
       formData.siteArea.trim()
     ) {
-      onSubmit({ id: Date.now().toString(), ...formData });
-      setFormData({
-        name: '',
-        client: '',
-        siteArea: '',
-        status: 'Pending',
-        dateCreated: new Date().toISOString().split('T')[0],
-      });
+      onSubmit({ id: initialData?.id || Date.now().toString(), ...formData });
     }
   };
 
@@ -82,7 +84,7 @@ export default function TestForm({
         className='border p-2 rounded'
       />
       <button type='submit' className='bg-blue-500 text-white p-2 rounded'>
-        Add Test
+        {initialData ? 'Update Test' : 'Add Test'}
       </button>
     </form>
   );

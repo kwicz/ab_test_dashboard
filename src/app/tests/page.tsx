@@ -34,9 +34,11 @@ const dummyData = [
 
 export default function TestsPage() {
   const router = useRouter();
-  const [isModalOpen, setModalOpen] = useState(false);
   const [filter, setFilter] = useState('');
-  const [tests, setTests] = useState(dummyData); // Start with dummyData
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [tests, setTests] = useState(dummyData);
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [currentTest, setCurrentTest] = useState<any>(null);
 
   useEffect(() => {
     const storedTests = localStorage.getItem('tests');
@@ -60,12 +62,18 @@ export default function TestsPage() {
     setModalOpen(false);
   };
 
+  const openUpdateModal = (test: any) => {
+    setCurrentTest(test);
+    setUpdateModalOpen(true);
+  };
+
   const updateTest = (updatedTest: any) => {
     const updatedTests = tests.map((test) =>
       test.id === updatedTest.id ? updatedTest : test
     );
     setTests(updatedTests);
     localStorage.setItem('tests', JSON.stringify(updatedTests));
+    setUpdateModalOpen(false);
   };
 
   const deleteTest = (id: string) => {
@@ -110,13 +118,19 @@ export default function TestsPage() {
             <TestCard test={test} />
             <div className='space-x-2'>
               <button
-                onClick={() => updateTest({ ...test, status: 'Updated' })}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openUpdateModal(test);
+                }}
                 className='bg-yellow-500 text-white p-2 rounded'
               >
                 Update
               </button>
               <button
-                onClick={() => deleteTest(test.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteTest(test.id);
+                }}
                 className='bg-red-500 text-white p-2 rounded'
               >
                 Delete
@@ -136,6 +150,20 @@ export default function TestsPage() {
               &times;
             </button>
             <TestForm onSubmit={addTest} />
+          </div>
+        </div>
+      )}
+      {isUpdateModalOpen && (
+        <div className='fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50'>
+          <div className='bg-white p-6 rounded-lg shadow-lg w-full md:w-1/2 lg:w-1/2 relative'>
+            <button
+              onClick={() => setUpdateModalOpen(false)}
+              className='absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-lg'
+            >
+              &times;
+            </button>
+            <h2 className='text-xl font-bold mb-4 text-black'>Update Test</h2>
+            <TestForm onSubmit={updateTest} initialData={currentTest} />
           </div>
         </div>
       )}
