@@ -19,3 +19,20 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+input,
+select,
+option,
+::placeholder,
+input[placeholder] {
+  color: #606060 !important;
+}
+
+.text-black {
+  color: #000;
+}
