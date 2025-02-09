@@ -20,28 +20,13 @@ export default function TestDetailsPage() {
   useEffect(() => {
     if (!params?.id) return;
 
-    // Simulated fetch (replace with real API call later)
-    const testData = [
-      {
-        id: '1',
-        name: 'Homepage CTA',
-        client: 'Client A',
-        siteArea: 'Landing Page',
-        status: 'Running',
-        dateCreated: '2024-02-01',
-      },
-      {
-        id: '2',
-        name: 'Checkout Button Color',
-        client: 'Client B',
-        siteArea: 'Checkout Page',
-        status: 'Completed',
-        dateCreated: '2024-01-15',
-      },
-    ];
-    const foundTest = testData.find((t) => t.id === params.id);
+    const storedTests = localStorage.getItem('tests');
+    const testData = storedTests ? JSON.parse(storedTests) : [];
+
+    const foundTest = testData.find((t: any) => t.id === params.id);
+
     if (!foundTest) {
-      router.push('/tests'); // Redirect if not found
+      router.push('/tests'); // Redirect only if not found
     } else {
       setTest(foundTest);
     }
