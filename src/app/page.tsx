@@ -33,7 +33,8 @@ export default function HomePage() {
       <div className='text-center mb-8'>
         <h1 className='text-3xl font-bold'>Welcome to A/B Test Manager</h1>
         <p className='text-gray-600 mt-2'>
-          Easily create, manage, and analyze your A/B tests.
+          Easily create, manage, and integrate your A/B tests with Google Tag
+          Manager
         </p>
       </div>
 
