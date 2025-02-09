@@ -1,5 +1,7 @@
 # A/B Test Dashboard
 
+_A Next.js A/B Test Management Dashboard for creating, updating, and tracking A/B tests. Features test filtering, local storage persistence, and Google Tag Manager (GTM) integration for event tracking. Built with Next.js, Tailwind CSS, and TypeScript._
+
 ## Core Features of the Dashboard
 
 1. Create a new test with a name, description, and test variations (A & B).
@@ -31,6 +33,8 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[MIT](https://choosealicense.com/licenses/mit/)
+
+Copyright (c) 2025 **_K Wicz_**
