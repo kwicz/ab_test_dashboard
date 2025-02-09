@@ -37,7 +37,6 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* Key Metrics */}
       <div className='grid grid-cols-1 md:grid-cols-3 gap-6 text-center'>
         <div className='p-6 bg-blue-100 rounded-lg shadow'>
           <p className='text-lg font-semibold text-black'>Running Tests</p>
