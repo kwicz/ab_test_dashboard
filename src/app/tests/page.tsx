@@ -37,7 +37,7 @@ export default function TestsPage() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [tests, setTests] = useState(dummyData);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
-  const [currentTest, setCurrentTest] = useState<Test | null>(null);
+  const [currentTest, setCurrentTest] = useState<Test | undefined>(undefined);
 
   useEffect(() => {
     const storedTests = localStorage.getItem('tests');
