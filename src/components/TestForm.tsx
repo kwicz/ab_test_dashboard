@@ -97,7 +97,7 @@ export default function TestForm({
         onChange={handleChange}
         className='border p-2 rounded'
       />
-      <button type='submit' className='bg-blue-500 text-white p-2 rounded'>
+      <button type='submit' className='btn btn-secondary p-2 rounded'>
         {initialData ? 'Update Test' : 'Add Test'}
       </button>
     </form>

@@ -13,9 +13,9 @@
     --foreground: #ededed;
   } */
   :root {
-    --primary: #bde8f1;
+    --primary: #f8ad9d;
     --secondary: #819fa7;
-    --accent: #5b6e74;
+    --accent: #ffdab9;
     --background: #f2f2f0;
     --text: #0d0d0d;
   }
@@ -42,23 +42,27 @@ input[placeholder] {
 }
 
 .text-black {
-  color: #000;
+  color: #0d0d0d;
 }
 
 .btn {
-  @apply px-4 py-2 rounded font-semibold transition;
+  @apply px-4 py-2 rounded font-semibold transition border-2 hover:bg-transparent transition-all duration-300;
 }
 
 .btn-primary {
-  @apply bg-primary text-text hover:bg-opacity-80;
+  @apply bg-primary border-primary text-text;
+}
+
+.btn-primary-ghost {
+  @apply border border-primary text-primary bg-transparent hover:bg-primary hover:text-white;
 }
 
 .btn-secondary {
-  @apply bg-secondary text-white hover:bg-opacity-80;
+  @apply bg-secondary border-secondary text-text;
 }
 
 .btn-accent {
-  @apply bg-accent text-white hover:bg-opacity-80;
+  @apply bg-accent text-text hover:bg-opacity-80;
 }
 
 .input {

@@ -39,6 +39,19 @@ export default function TestsPage() {
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [currentTest, setCurrentTest] = useState<Test | undefined>(undefined);
 
+  // Prevents SSR mismatch
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedTests = localStorage.getItem('tests');
+      if (storedTests) {
+        setTests(JSON.parse(storedTests));
+      } else {
+        localStorage.setItem('tests', JSON.stringify(dummyData));
+        setTests(dummyData);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const storedTests = localStorage.getItem('tests');
     if (storedTests) {
@@ -138,7 +151,7 @@ export default function TestsPage() {
         />
         <button
           onClick={() => setModalOpen(true)}
-          className='bg-blue-500 text-white p-2 rounded'
+          className='btn btn-primary p-2 rounded'
         >
           Add New Test
         </button>
@@ -158,7 +171,7 @@ export default function TestsPage() {
                   e.stopPropagation();
                   openUpdateModal(test);
                 }}
-                className='bg-yellow-500 text-white p-2 rounded'
+                className='btn btn-secondary text-black p-2 rounded'
               >
                 Update
               </button>
@@ -167,7 +180,7 @@ export default function TestsPage() {
                   e.stopPropagation();
                   deleteTest(test.id);
                 }}
-                className='bg-red-500 text-white p-2 rounded'
+                className='btn btn-secondary text-black p-2 rounded'
               >
                 Delete
               </button>

@@ -56,13 +56,13 @@ export default function HomePage() {
       <div className='flex justify-center mt-6 gap-4'>
         <button
           onClick={() => router.push('/tests')}
-          className='bg-blue-500 text-white px-4 py-2 rounded'
+          className='btn btn-primary text-white px-4 py-2 rounded'
         >
           View All Tests
         </button>
         <button
           onClick={() => router.push('/tests/new')}
-          className='bg-green-500 text-white px-4 py-2 rounded'
+          className='btn btn-primary text-white px-4 py-2 rounded'
         >
           Create New Test
         </button>
