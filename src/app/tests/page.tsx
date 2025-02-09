@@ -63,12 +63,56 @@ export default function TestsPage() {
     dateCreated: string;
   }
 
+  const pushToGTM = (event: string, data: any) => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push({ event, ...data });
+    }
+  };
+
   const addTest = (test: Test) => {
     const updatedTests = [...tests, test];
     setTests(updatedTests);
     localStorage.setItem('tests', JSON.stringify(updatedTests));
+    pushToGTM('ab_test_created', {
+      testName: test.name,
+      client: test.client,
+      status: test.status,
+    });
     setModalOpen(false);
   };
+
+  const updateTest = (updatedTest: Test) => {
+    const updatedTests = tests.map((test) =>
+      test.id === updatedTest.id ? updatedTest : test
+    );
+    setTests(updatedTests);
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+    pushToGTM('ab_test_updated', {
+      testName: updatedTest.name,
+      client: updatedTest.client,
+      status: updatedTest.status,
+    });
+    setUpdateModalOpen(false);
+  };
+
+  const deleteTest = (id: string) => {
+    const deletedTest = tests.find((test) => test.id === id);
+    const updatedTests = tests.filter((test) => test.id !== id);
+    setTests(updatedTests);
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+    pushToGTM('ab_test_deleted', {
+      testName: deletedTest?.name,
+      client: deletedTest?.client,
+    });
+  };
+
+  const filteredTests = tests.filter(
+    (test) =>
+      test.name.toLowerCase().includes(filter.toLowerCase()) ||
+      test.client.toLowerCase().includes(filter.toLowerCase()) ||
+      test.siteArea.toLowerCase().includes(filter.toLowerCase()) ||
+      test.status.toLowerCase().includes(filter.toLowerCase())
+  );
 
   const openUpdateModal = (test: {
     id: string;
@@ -81,29 +125,6 @@ export default function TestsPage() {
     setCurrentTest(test);
     setUpdateModalOpen(true);
   };
-
-  const updateTest = (updatedTest: Test) => {
-    const updatedTests = tests.map((test) =>
-      test.id === updatedTest.id ? updatedTest : test
-    );
-    setTests(updatedTests);
-    localStorage.setItem('tests', JSON.stringify(updatedTests));
-    setUpdateModalOpen(false);
-  };
-
-  const deleteTest = (id: string) => {
-    const updatedTests = tests.filter((test) => test.id !== id);
-    setTests(updatedTests);
-    localStorage.setItem('tests', JSON.stringify(updatedTests));
-  };
-
-  const filteredTests = tests.filter(
-    (test) =>
-      test.name.toLowerCase().includes(filter.toLowerCase()) ||
-      test.client.toLowerCase().includes(filter.toLowerCase()) ||
-      test.siteArea.toLowerCase().includes(filter.toLowerCase()) ||
-      test.status.toLowerCase().includes(filter.toLowerCase())
-  );
 
   return (
     <div className='container mx-auto p-6'>
