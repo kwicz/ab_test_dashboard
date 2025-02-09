@@ -21,6 +21,7 @@ export default function HomePage() {
     setTests(storedTests ? JSON.parse(storedTests) : []);
   }, []);
 
+  console.log('deployment check');
   const runningTests = tests.filter((test) => test.status === 'Running').length;
   const completedTests = tests.filter(
     (test) => test.status === 'Completed'
@@ -29,7 +30,6 @@ export default function HomePage() {
 
   return (
     <div className='container mx-auto p-6'>
-      {/* Welcome Section */}
       <div className='text-center mb-8'>
         <h1 className='text-3xl font-bold'>Welcome to A/B Test Manager</h1>
         <p className='text-gray-600 mt-2'>
