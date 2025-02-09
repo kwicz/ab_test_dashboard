@@ -5,7 +5,7 @@ import TestCard from '@/components/TestCard';
 
 export default function HomePage() {
   const router = useRouter();
-  const [tests, setTests] = useState([]);
+  const [tests, setTests] = useState<{ id: string; status: string }[]>([]);
 
   useEffect(() => {
     const storedTests = localStorage.getItem('tests');
