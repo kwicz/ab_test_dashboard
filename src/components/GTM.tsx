@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 export default function GTM() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const GTM_ID = 'GTM-W6VFGK97'; // Replace with your GTM ID
+      const GTM_ID = 'GTM-W6VFGK97';
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;

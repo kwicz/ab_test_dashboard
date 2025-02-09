@@ -31,6 +31,21 @@ const dummyData = [
   },
 ];
 
+declare global {
+  interface Window {
+    dataLayer: Array<{ event: string; [key: string]: unknown }>;
+  }
+}
+
+interface Test {
+  id: string;
+  name: string;
+  client: string;
+  siteArea: string;
+  status: string;
+  dateCreated: string;
+}
+
 export default function TestsPage() {
   const router = useRouter();
   const [filter, setFilter] = useState('');
@@ -67,16 +82,7 @@ export default function TestsPage() {
     }
   }, [tests]);
 
-  interface Test {
-    id: string;
-    name: string;
-    client: string;
-    siteArea: string;
-    status: string;
-    dateCreated: string;
-  }
-
-  const pushToGTM = (event: string, data: any) => {
+  const pushToGTM = (event: string, data: Record<string, unknown>) => {
     if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({ event, ...data });
     }
